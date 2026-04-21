@@ -15,4 +15,11 @@
         <item>Mistura 2024</item>
         <item>Teatro La Plaza - Edipo Rey</item>
     </string-array>
+
+    <!-- Login Strings -->
+    <string name="login_title">Inicio de Sesión</string>
+    <string name="login_user_hint">Usuario</string>
+    <string name="login_password_hint">Contraseña</string>
+    <string name="login_button">Ingresar</string>
+    <string name="login_error_message">Usuario o contraseña incorrectos</string>
 </resources>
