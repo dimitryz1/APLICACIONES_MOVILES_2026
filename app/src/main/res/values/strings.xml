@@ -9,6 +9,7 @@
     <string name="ticket_event_format">Evento: %s</string>
     <string name="ticket_status_valid">Estado: VÁLIDO</string>
     <string name="back_button">Regresar</string>
+    <string name="logout_button">Cerrar Sesión</string>
 
     <string-array name="events_array">
         <item>Concierto Grupo 5 - Lima</item>
