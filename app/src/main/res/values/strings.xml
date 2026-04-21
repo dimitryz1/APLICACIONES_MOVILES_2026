@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">GatherUp Perú</string>
+    <string name="user_name_label">Nombre del Usuario</string>
+    <string name="user_name_hint">Ej. Juan Pérez</string>
+    <string name="select_event_label">Selecciona un Evento</string>
+    <string name="buy_ticket_button">Comprar Ticket</string>
+    <string name="ticket_detail_title">Detalle de tu Ticket</string>
+    <string name="ticket_user_format">Usuario: %s</string>
+    <string name="ticket_event_format">Evento: %s</string>
+    <string name="ticket_status_valid">Estado: VÁLIDO</string>
+    <string name="back_button">Regresar</string>
+
+    <string-array name="events_array">
+        <item>Concierto Grupo 5 - Lima</item>
+        <item>Mistura 2024</item>
+        <item>Teatro La Plaza - Edipo Rey</item>
+    </string-array>
+</resources>
