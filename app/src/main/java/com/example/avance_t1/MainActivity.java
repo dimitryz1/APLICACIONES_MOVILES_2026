@@ -27,18 +27,29 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Restaurando la lógica de los componentes
+        // Referencias a los componentes
         EditText etUserName = findViewById(R.id.etUserName);
         Spinner spEvents = findViewById(R.id.spEvents);
         Button btnBuyTicket = findViewById(R.id.btnBuyTicket);
+
+        // Instancia de la base de datos
+        AppDatabase db = AppDatabase.getInstance(this);
 
         btnBuyTicket.setOnClickListener(v -> {
             String userName = etUserName.getText().toString().trim();
             String selectedEvent = (spEvents.getSelectedItem() != null) ? spEvents.getSelectedItem().toString() : "";
 
             if (userName.isEmpty()) {
-                Toast.makeText(this, "Por favo, ingresa tu nombre", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Por favor, ingresa tu nombre", Toast.LENGTH_SHORT).show();
             } else {
+                // --- Lógica de Room ---
+                // Guardamos el ticket en la base de datos local
+                Ticket newTicket = new Ticket(userName, selectedEvent);
+                db.ticketDao().insert(newTicket);
+                
+                Toast.makeText(this, "Ticket guardado en la DB", Toast.LENGTH_SHORT).show();
+
+                // Navegar a la pantalla del Ticket
                 Intent intent = new Intent(MainActivity.this, TicketActivity.class);
                 intent.putExtra("USER_NAME", userName);
                 intent.putExtra("EVENT_NAME", selectedEvent);
