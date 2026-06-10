@@ -41,6 +41,12 @@
         android:layout_height="wrap_content"
         android:text="@string/login_button"
         android:backgroundTint="#6200EE"
-        android:textColor="@color/white" />
+        android:textColor="@color/white"
+        android:layout_marginBottom="16dp" />
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/btnGoogleSignIn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

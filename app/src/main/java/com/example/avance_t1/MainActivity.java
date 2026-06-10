@@ -32,6 +32,12 @@ public class MainActivity extends AppCompatActivity {
         Spinner spEvents = findViewById(R.id.spEvents);
         Button btnBuyTicket = findViewById(R.id.btnBuyTicket);
 
+        // Recibir nombre desde LoginActivity si existe
+        String loginUserName = getIntent().getStringExtra("USER_NAME");
+        if (loginUserName != null && !loginUserName.isEmpty()) {
+            etUserName.setText(loginUserName);
+        }
+
         // Instancia de la base de datos
         AppDatabase db = AppDatabase.getInstance(this);
 

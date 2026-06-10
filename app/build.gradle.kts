@@ -14,6 +14,12 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        // Usar rootProject para acceder a las propiedades de forma más limpia en Kotlin DSL
+        val mapsApiKey = project.rootProject.extra.properties["MAPS_API_KEY"] as? String 
+                        ?: (project.findProperty("MAPS_API_KEY") as? String) ?: ""
+
+        manifestPlaceholders["MAPS_API_KEY"] = mapsApiKey
     }
 
     buildTypes {
@@ -40,6 +46,10 @@ dependencies {
     // Room dependencies
     implementation(libs.room.runtime)
     annotationProcessor(libs.room.compiler)
+
+    // Google Play Services
+    implementation(libs.play.services.auth)
+    implementation(libs.play.services.maps)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)

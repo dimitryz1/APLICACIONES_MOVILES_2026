@@ -1,71 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="24dp"
-    android:gravity="center_horizontal"
-    android:background="#F5F5F5">
+    android:padding="16dp"
+    android:background="#F5F5F5"
+    tools:context=".TicketActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/ticket_detail_title"
-        android:textSize="28sp"
+        android:textSize="24sp"
         android:textStyle="bold"
-        android:layout_marginBottom="32dp" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp">
+        android:layout_marginBottom="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="24dp">
+            android:padding="16dp">
 
             <TextView
                 android:id="@+id/tvTicketUser"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:layout_marginBottom="12dp" />
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp" />
 
             <TextView
                 android:id="@+id/tvTicketEvent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="12dp" />
+                android:layout_marginBottom="8dp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/ticket_status_valid"
                 android:textColor="#4CAF50"
-                android:textSize="16sp"
                 android:textStyle="bold" />
-
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <Button
-        android:id="@+id/btnBack"
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/back_button"
-        android:backgroundTint="#9E9E9E"
+        android:text="Ubicación del Evento"
+        android:textSize="18sp"
+        android:textStyle="bold"
         android:layout_marginBottom="8dp" />
 
-    <Button
-        android:id="@+id/btnLogout"
+    <!-- Contenedor para el Mapa -->
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/map_fragment"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginBottom="16dp" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/logout_button"
-        android:backgroundTint="#F44336"
-        android:textColor="@color/white" />
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/back_button"
+            android:backgroundTint="#9E9E9E"
+            android:layout_marginEnd="4dp" />
+
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/logout_button"
+            android:backgroundTint="#F44336"
+            android:textColor="@color/white"
+            android:layout_marginStart="4dp" />
+    </LinearLayout>
 
 </LinearLayout>
