@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
 }
@@ -15,9 +17,16 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        // Usar rootProject para acceder a las propiedades de forma más limpia en Kotlin DSL
-        val mapsApiKey = project.rootProject.extra.properties["MAPS_API_KEY"] as? String 
-                        ?: (project.findProperty("MAPS_API_KEY") as? String) ?: ""
+        // Leer local.properties manualmente
+        val localProperties = Properties()
+        val localPropertiesFile = rootProject.file("local.properties")
+        if (localPropertiesFile.exists()) {
+            localPropertiesFile.inputStream().use { stream ->
+                localProperties.load(stream)
+            }
+        }
+
+        val mapsApiKey = localProperties.getProperty("MAPS_API_KEY") ?: ""
 
         manifestPlaceholders["MAPS_API_KEY"] = mapsApiKey
     }
