@@ -23,4 +23,10 @@
     <string name="login_password_hint">Contraseña</string>
     <string name="login_button">Ingresar</string>
     <string name="login_error_message">Usuario o contraseña incorrectos</string>
+
+    <!-- Historial Strings -->
+    <string name="ver_historial_button">Ver Historial de Tickets</string>
+    <string name="historial_title">Historial de Tickets</string>
+    <string name="empty_historial">Aún no tienes tickets</string>
+    <string name="ticket_number_format">Ticket #%d</string>
 </resources>

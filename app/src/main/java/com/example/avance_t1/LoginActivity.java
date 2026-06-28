@@ -3,8 +3,12 @@ package com.example.avance_t1;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Button;
-import android.widget.EditText;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.ScaleAnimation;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -15,9 +19,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -30,31 +35,45 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Configuración de controles tradicionales
-        EditText etUsername = findViewById(R.id.etUsername);
-        EditText etPassword = findViewById(R.id.etPassword);
-        Button btnLogin = findViewById(R.id.btnLogin);
-        SignInButton btnGoogleSignIn = findViewById(R.id.btnGoogleSignIn);
+        // Animación de entrada del logo
+        ImageView ivLogo = findViewById(R.id.ivLogo);
+        AnimationSet animSet = new AnimationSet(true);
+        ScaleAnimation scale = new ScaleAnimation(
+                0.4f, 1f, 0.4f, 1f,
+                Animation.RELATIVE_TO_SELF, 0.5f,
+                Animation.RELATIVE_TO_SELF, 0.5f);
+        AlphaAnimation alpha = new AlphaAnimation(0f, 1f);
+        scale.setDuration(700);
+        alpha.setDuration(700);
+        animSet.addAnimation(scale);
+        animSet.addAnimation(alpha);
+        animSet.setInterpolator(new DecelerateInterpolator());
+        ivLogo.startAnimation(animSet);
 
+        // Referencias a los controles (ahora Material)
+        TextInputEditText etUsername = findViewById(R.id.etUsername);
+        TextInputEditText etPassword = findViewById(R.id.etPassword);
+        MaterialButton btnLogin = findViewById(R.id.btnLogin);
+        MaterialButton btnGoogleSignIn = findViewById(R.id.btnGoogleSignIn);
+
+        // Login tradicional
         btnLogin.setOnClickListener(v -> {
-            String user = etUsername.getText().toString().trim();
-            String pass = etPassword.getText().toString().trim();
+            String user = etUsername.getText() != null ? etUsername.getText().toString().trim() : "";
+            String pass = etPassword.getText() != null ? etPassword.getText().toString().trim() : "";
 
             if (user.equals("admin") && pass.equals("admin123")) {
                 navigateToMain("Admin User");
             } else {
-                Toast.makeText(this, "Error de credenciales", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.login_error_message), Toast.LENGTH_SHORT).show();
             }
         });
 
-        // Configuración de Google Sign-In
+        // Configuración Google Sign-In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
-
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        // Inicializar el ActivityResultLauncher para Google Sign-In
         googleSignInLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
@@ -64,11 +83,9 @@ public class LoginActivity extends AppCompatActivity {
                         Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
                         handleSignInResult(task);
                     } else {
-                        // Si no es RESULT_OK, es probable que haya un error de configuración (SHA-1)
-                        Toast.makeText(this, "Sesión cancelada o error de configuración. Código: " + result.getResultCode(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, "Sesión cancelada. Código: " + result.getResultCode(), Toast.LENGTH_LONG).show();
                     }
-                }
-        );
+                });
 
         btnGoogleSignIn.setOnClickListener(v -> signIn());
     }
@@ -81,7 +98,6 @@ public class LoginActivity extends AppCompatActivity {
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            // Sign in success, navigate to Main
             navigateToMain(account.getDisplayName());
         } catch (ApiException e) {
             int statusCode = e.getStatusCode();

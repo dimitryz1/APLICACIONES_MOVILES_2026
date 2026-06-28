@@ -3,19 +3,34 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <!-- Professional Palette -->
-    <color name="primary">#6200EE</color>
+    <!-- GatherUp Indigo Palette -->
+    <color name="primary">#5C6BC0</color>
+    <color name="primary_dark">#3949AB</color>
+    <color name="primary_darker">#1A237E</color>
+    <color name="primary_light">#C5CAE9</color>
+    <color name="primary_pale">#EEF2FF</color>
     <color name="primary_variant">#3700B3</color>
-    <color name="secondary">#03DAC6</color>
-    <color name="background">#F8F9FA</color>
+    <color name="secondary">#FF7043</color>
+
+    <!-- Surfaces -->
+    <color name="background">#F5F6FF</color>
     <color name="surface">#FFFFFF</color>
-    <color name="error">#B00020</color>
 
-    <!-- Text Colors -->
-    <color name="text_primary">#212121</color>
+    <!-- Status -->
+    <color name="error">#E53935</color>
+    <color name="valid_green">#2E7D32</color>
+    <color name="valid_green_bg">#E8F5E9</color>
+    <color name="valid_green_border">#4CAF50</color>
+
+    <!-- Text -->
+    <color name="text_primary">#1A1A2E</color>
     <color name="text_secondary">#757575</color>
+    <color name="text_on_primary">#FFFFFF</color>
+    <color name="text_hint">#BDBDBD</color>
 
-    <!-- Button Colors -->
+    <!-- UI -->
+    <color name="gray_light">#E8EAF6</color>
+    <color name="divider">#E0E0E0</color>
     <color name="google_blue">#4285F4</color>
-    <color name="gray_light">#E0E0E0</color>
+    <color name="login_subtitle">#90CAF9</color>
 </resources>
